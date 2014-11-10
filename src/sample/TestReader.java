@@ -19,8 +19,7 @@ public class TestReader {
         BufferedReader bufferedReader = new BufferedReader(fr);
         String s;
         while ((s = bufferedReader.readLine()) != null) {
-            Double i = Double.valueOf(s);
-            list.add(i);
+            list.add(Double.valueOf(s));
         }
         return list;
     }
