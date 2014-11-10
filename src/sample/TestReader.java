@@ -15,8 +15,7 @@ public class TestReader {
 
     public List<Double> read() throws IOException {
         List<Double> list = new ArrayList<>();
-        FileReader fr = new FileReader(filePath);
-        BufferedReader bufferedReader = new BufferedReader(fr);
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         String s;
         while ((s = bufferedReader.readLine()) != null) {
             list.add(Double.valueOf(s));
