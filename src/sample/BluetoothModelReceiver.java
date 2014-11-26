@@ -3,8 +3,6 @@ package sample;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by Ирина on 11.11.2014.
@@ -12,24 +10,29 @@ import java.util.Iterator;
 public class BluetoothModelReceiver {
 
     private long period;
-    private ArrayList<Double> ECGStorage;
+    //private ArrayList<Double> ECGStorage;
+    private double ECGStorage[];
+    //private Iterator currentMeasure;
+    int i = 0;
 
     public BluetoothModelReceiver(long period, String filePath) throws IOException {
         this.period = period;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
             String s;
-            ECGStorage = new ArrayList<>();
+            ECGStorage = new double[10000];
+            // index = ECGStorage[i];
 
             while ((s = bufferedReader.readLine()) != null) {
-                ECGStorage.add(Double.valueOf(s));
+                ECGStorage[i] = Double.valueOf(s);
+                i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void doStep(ArrayList arrayList) {
+    /*public void doStepWithLatency(ArrayList<Double> arrayList) {
         //с заданной задержкой брать из testreader кусок информации и класть ее в очередьs
         long now = System.currentTimeMillis();
         //вызываем функцию receiveECGPortion()
@@ -42,15 +45,18 @@ public class BluetoothModelReceiver {
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-    }
+    }*/
 
-    private void receiveECGPortion(ArrayList arrayList) {
-        Iterator it = ECGStorage.iterator();
+    public void receiveECG(double ECGBuffer[]) {
+        /*Iterator it = ECGStorage.iterator();
         if (it.hasNext()) {
             Object obj = it.next();
             System.out.println(obj);
             arrayList.add(obj);
             it.remove();
-        }
+        }*/
+        for (i = 0; i < ECGBuffer.length; i++)
+            ECGBuffer[i] = ECGStorage[i];
+
     }
 }
