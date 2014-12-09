@@ -11,9 +11,11 @@ public class Main {
         //string filename
         final String filepath = "D:\\ECG.txt";
         BluetoothModelReceiver bluetoothModelReciever = new BluetoothModelReceiver(queue, filepath);
-        ECGSignalHandler ecgHandler = new ECGSignalHandler(queue);
+        ECGSignalHandler ecgSignalHandler = new ECGSignalHandler(queue);
 
         bluetoothModelReciever.start();
-        ecgHandler.start();
+        ecgSignalHandler.start();
+
     }
+
 }
